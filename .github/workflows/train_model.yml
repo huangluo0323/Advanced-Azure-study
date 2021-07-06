@@ -23,11 +23,11 @@ jobs:
       id: aml_workspace
       uses: Azure/aml-workspace@v1
       with:
-          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+          azure_credentials: ${{ secrets.AAA }}
     
     # Submit a training run to the Azure Machine Learning
     - name: Submit training run
       id: aml_run
       uses: Azure/aml-run@v1
       with:
-          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+          azure_credentials: ${{ secrets.AAA }}
