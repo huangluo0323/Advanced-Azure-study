@@ -1,5 +1,4 @@
 name: Model deployment
-
 on:
   repository_dispatch:
     types: [machinelearningservices-runcompleted]
