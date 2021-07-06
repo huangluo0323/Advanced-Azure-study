@@ -23,19 +23,19 @@ jobs:
         id: aml_workspace
         uses: Azure/aml-workspace@v1
         with:
-            azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+            azure_credentials: ${{ secrets.AAA }}
             
       - uses: Azure/aml-compute@v1
         id: aml_compute
         with:
-          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+          azure_credentials: ${{ secrets.AAA }}
           
       # # Register model in Azure Machine Learning model registry
       - name: Register model
         id: aml_registermodel
         uses: Azure/aml-registermodel@ashishonce/adddefaulttags
         with:
-             azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+             azure_credentials: ${{ secrets.AAA }}
              run_id:  ${{ github.event.client_payload.data.runId }}
              experiment_name: ${{ github.event.client_payload.data.experimentName }}
 
@@ -44,7 +44,7 @@ jobs:
         id: aml_dev_deploy
         uses: Azure/aml-deploy@v1
         with:
-            azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+            azure_credentials: ${{ secrets.AAA }}
             model_name:  "${{ steps.aml_registermodel.outputs.model_name }}"
             model_version: "${{ steps.aml_registermodel.outputs.model_version }}"
             parameters_file: "deploy_aci.json"
@@ -59,7 +59,7 @@ jobs:
         id: aml_prod_deploy
         uses: Azure/aml-deploy@v1
         with:
-           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+           azure_credentials: ${{ secrets.AAA }}
            model_name:  "${{ steps.aml_registermodel.outputs.model_name }}"  
            model_version: "${{ steps.aml_registermodel.outputs.model_version }}"
            parameters_file: "deploy_aks.json"
