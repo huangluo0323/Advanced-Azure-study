@@ -1,5 +1,4 @@
 name: Infra Deployment and Training
-
 on:
   push:
     paths: 
